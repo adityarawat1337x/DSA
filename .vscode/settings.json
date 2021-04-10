@@ -2,6 +2,7 @@
     "git.ignoreLimitWarning": true,
     "python.pythonPath": "/usr/bin/python2",
     "files.associations": {
-        "random": "c"
+        "random": "c",
+        "iostream": "cpp"
     }
 }
