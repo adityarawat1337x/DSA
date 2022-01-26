@@ -6,28 +6,23 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
     public:
-    static bool compare(int x,int y)
-   {
-       int count_x=0,count_y=0;
-       while(x>0)
-       {
-           ++count_x;
-           x=x&(x-1);
-       }
-       while(y>0)
-       {
-           ++count_y;
-           y=y&(y-1);
-       }
-       if(count_x!=count_y)
-           return(count_x>count_y);
-       return x<y;    
-   }
-   void sortBySetBitCount(int arr[], int n)
-   {
-       // Your code goes here
-       stable_sort(arr,arr+n,compare);
-   }
+    
+    static int cntbits(int n){
+        if(n==0)
+            return n;
+        
+        return 1+ cntbits(n & (n-1));
+    }
+    
+    static bool comp(int a,int b){
+        int cntA =cntbits(a),cntB = cntbits(b);
+        return cntA>cntB;
+    }
+    
+    void sortBySetBitCount(int arr[], int n)
+    {
+        stable_sort(arr,arr+n,comp);
+    }
 };
 
 // { Driver Code Starts.
