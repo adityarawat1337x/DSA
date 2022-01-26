@@ -9,20 +9,18 @@ class Solution
     public:
     int dp[10001];
     
-    
-    int loot(int arr[],int n,int idx){
-        if(idx>=n)
-            return 0;
-        if(dp[idx]!=-1)
-            return dp[idx];
-        return dp[idx] =  max(arr[idx] + loot(arr,n,idx+2),loot(arr,n,idx+1));
-    }
-    
     //Function to find the maximum money the thief can get.
     int FindMaxSum(int arr[], int n)
     {
-        memset(dp,-1,sizeof(dp));
-        return loot(arr,n,0);
+        //memset(dp,-1,sizeof(dp));
+        dp[0]=arr[0];
+        dp[1]=max(arr[0],arr[1]);
+        
+        for(int i=2;i<n;i++){
+            dp[i] = max(dp[i-1],arr[i] + dp[i-2]);
+        }
+        
+        return dp[n-1];
     }
 };
 
