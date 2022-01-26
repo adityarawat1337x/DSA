@@ -14,17 +14,31 @@ class Solution{
     // nums: given vector
     // return the Product vector P that hold product except self at each index
     vector<long long int> productExceptSelf(vector<long long int>& arr, int n) {
-        vector<long long int>  rprod(n+1,1);
         vector<long long int>  ans(n,1);
-        long long int lprod=1;
-        rprod[n-1]=1;
-        for(int i=n-2;i>-1;i--){
-            rprod[i]=rprod[i+1]*arr[i+1];
+        
+        long long int zer=0,prod=1,prod2=1,pos=0;
+        
+        for(int i=n-1;i>-1;i--){
+            if(!arr[i]){
+                zer++;
+                pos=i;
+            }
+            prod*=arr[i];
         }
-        lprod=1;
+        
+        
+        if(zer==1){
+            arr[pos]=1;
+            for(int i=n-1;i>-1;i--){
+                prod2*=arr[i];
+            }
+            arr[pos]=0;
+        }
+        
         for(int i=0;i<n;i++){
-            ans[i] = lprod*rprod[i];
-            lprod*=arr[i];
+            long long int res = (zer==0 || zer>1)?(arr[i]!=0?prod/arr[i]:prod):(arr[i]==0?prod2:prod);
+            ans[i]=res;
+            
         }
         
         return ans;
@@ -32,6 +46,8 @@ class Solution{
 };
 
 
+
+///boooooooommmm
 // { Driver Code Starts.
 int main()
  {
