@@ -27,17 +27,14 @@ int main()
 }// } Driver Code Ends
 
 
-bool findPair(int arr[], int size, int n){
-    unordered_map<int,int> mp;
-    
-    for(int i=0;i<size;i++)
-        mp[arr[i]]=1;
-    for(int i=0;i<size;i++){
-        if(mp.find(abs(n - arr[i]))!=mp.end()){
-            return true;
-        }
-       
+bool findPair(int a[], int size, int n){
+    sort(a,a+size);
+    int i=0,j=0;
+    while(i<size&&j<size)
+    {
+        if(a[j]-a[i]==n&&i!=j)return 1;
+        else if(a[j]-a[i]<n)j++;
+        else i++;
     }
-    
     return false;
 }
