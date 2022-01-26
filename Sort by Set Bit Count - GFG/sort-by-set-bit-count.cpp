@@ -21,7 +21,17 @@ class Solution{
     
     void sortBySetBitCount(int arr[], int n)
     {
-        stable_sort(arr,arr+n,comp);
+        //stable_sort(arr,arr+n,comp);
+       multimap<int,int>m;
+       for(int i=n-1;i>=0;--i){
+       int count=__builtin_popcount(arr[i]);
+       m.insert(make_pair(count,arr[i]));
+       }
+       int i=0;
+       for(auto it=m.begin();it!=m.end();it++){
+           arr[n-1-i]=it->second;
+           i++;
+       }
     }
 };
 
