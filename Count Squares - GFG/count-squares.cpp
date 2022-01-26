@@ -6,13 +6,20 @@ using namespace std;
 class Solution {
   public:
     int countSquares(int N) {
-        int i=0;
-        for(i=0;i<N;i++){
-            if(i*i>=N)
-                break;
+        long long l=1,r=N/2,m;
+        if (N == 0 || N == 1)
+            return N-1;
+        while(l<=r){
+            m = l+ (r-l)/2;
+            long sq = m*m;
+            if(sq==N)
+                return m-1;
+            if(sq>N)
+                r=m-1;
+            else
+                l=m+1;
         }
-        
-        return i-1;
+        return l-1;
     }
 };
 
