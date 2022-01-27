@@ -10,11 +10,9 @@ struct Node{
 };
 
 class MyCalendar {
-    Node* root;
+    Node* root = NULL;
 public:
-    MyCalendar() {
-        root = nullptr;
-    }
+    MyCalendar() {}
     
     bool insert(Node* root,int a,int b){
          if(root->start>=b){
