@@ -13,7 +13,7 @@ class MyCalendar {
     Node* root;
 public:
     MyCalendar() {
-        root = new Node(-1,-1);
+        root = nullptr;
     }
     
     bool insert(Node* root,int a,int b){
@@ -37,9 +37,8 @@ public:
     }
     
     bool book(int a, int b) {
-        if(root->start==-1){
-            root->start = a;
-            root->end = b;
+        if(!root){
+            root = new Node(a,b);
             return true;
         }
         
