@@ -7,9 +7,8 @@ public:
             if(tmp>sum){
                 sum=tmp;
             }
-            if(tmp<=0)
+            if(tmp<0)
                 tmp=0;
-            
         }
         
         return sum;
