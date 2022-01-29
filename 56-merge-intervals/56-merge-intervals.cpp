@@ -1,22 +1,21 @@
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intv) {
-        sort(intv.begin(),intv.end());
-        vector<vector<int>> ans;
-        vector<int> prev = intv[0];
-        ans.push_back(intv[0]);
-        
-        for(int i=1;i<intv.size();i++){
-            if(intv[i][0] <= prev[1]){
-                ans.pop_back();
-                ans.push_back({min(prev[0],intv[i][0]),max(prev[1],intv[i][1])});
-                prev=ans.back();
-            }else{
-                ans.push_back(intv[i]);
-                prev=ans.back();
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> res;
+        int l = intervals[0][0];
+        int r = intervals[0][1];
+        for(int i = 1; i < intervals.size(); i++) {
+            if(intervals[i][0] <= r) {
+                if(intervals[i][1] > r)
+                    r = intervals[i][1];
+            } else {
+                res.push_back({l, r});
+                l = intervals[i][0];
+                r = intervals[i][1];
             }
         }
-        
-        return ans;
+        res.push_back({l, r});
+        return res;
     }
 };
