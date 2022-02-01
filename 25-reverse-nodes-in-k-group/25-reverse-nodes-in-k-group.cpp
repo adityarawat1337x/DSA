@@ -22,7 +22,6 @@ public:
             tmp->next=newHead;
             newHead=tmp;
         }
-        cout<<"reverse "<<newHead->val<<" "<<newTail->val<<"\n";
         return {newHead,newTail};
     }
     
