@@ -14,27 +14,22 @@ public:
         if(!head)
             return head;
         int n=0;
-        ListNode* tmp=head;
+        ListNode* tmp=head,*last;
         while(tmp){
             n++;
+            last=tmp;
             tmp=tmp->next;
         }
         
         k=k%n;
-        tmp=head;
-        n=1;
-        while(tmp->next){
-            n++;
-            tmp=tmp->next;
-        }
-        tmp->next=head;
+        last->next=head;
         int cnt=n-k-1;
-        tmp=head;
+        last=head;
         while(cnt--){
-            tmp=tmp->next;
+            last=last->next;
         }
-        head = tmp->next;
-        tmp->next=NULL;
+        head = last->next;
+        last->next=NULL;
         
         return head;
     }
