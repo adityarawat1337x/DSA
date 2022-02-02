@@ -6,18 +6,17 @@ using namespace std;
 class Solution
 {
 public:
-    void solve(vector<int> arr,int n,int idx,int sum,vector<int> &ans){
-        if(idx>=n){
-            return;
-        ans.push_back(sum+arr[idx]);
-        solve(arr,n,idx+1,sum+arr[idx],ans);
-        solve(arr,n,idx+1,sum,ans);
+    void recursion(vector<int>&arr,int start,vector<int>&ans,int sum){
+        for(int i =start ; i< arr.size();i++){
+            ans.push_back(sum+arr[i]);
+            recursion(arr,i+1,ans,sum+arr[i]);
+        }
     }
     vector<int> subsetSums(vector<int> arr, int N)
     {
         vector<int> ans;
         ans.push_back(0);
-        solve(arr,N,0,0,ans);
+        recursion(arr,0,ans,0);
         return ans;
     }
 };
