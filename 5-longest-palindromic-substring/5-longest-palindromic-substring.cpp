@@ -1,33 +1,29 @@
 class Solution {
 public:
+    bool ispal(string s,int n){
+    for(int i=0;i<n/2;i++){
+        if(s[i]!=s[n-i-1])
+            return false;
+    }
+    return true;
+}
+
     string longestPalindrome(string s) {
-        int n = s.length();
-        if(!n)
-            return "";
-        int start,length;
-        vector<vector<bool>> dp(n,vector<bool>(n,false));
-        for(int g=0;g<n;g++)
-        {
-            for(int i=0,j=g;j<n;j++,i++)
-            {
-                if(!g){
-                    dp[i][j] = true;
-                    start = i,length = g+1;
+        int n=s.size();
+        string p;
+        bool lps[n][n];
+        int m=-1;
+            
+        for(int i=n-1;i>=0;i--)
+            for(int j=i;j<n;j++){
+                lps[i][j] = (s[i]==s[j]) && (j-i<3 || lps[i+1][j-1]);
+                
+                if(lps[i][j] && j-i+1>m){
+                    int l = j-i+1;
+                        m=l;
+                        p=s.substr(i,l);
                 }
-                else if(g==1){
-                    if(s[i]==s[j]){
-                         dp[i][j] = true;
-                         start = i,length = g+1;
-                    }
-                }
-                else{
-                    dp[i][j] = s[i]==s[j] && dp[i+1][j-1];
-                    if(dp[i][j]){
-                        start = i,length = g+1;
-                    }
-                }
-            }
         }
-        return s.substr(start,length);
+        return p;
     }
 };
