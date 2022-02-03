@@ -1,14 +1,6 @@
 class Solution {
 public:
     int  arr[9]={1,2,3,4,5,6,7,8,9};
-    int fact(int a){
-        int ans=1;
-        while(a){
-            ans*=a;
-            a--;
-        }
-        return ans;
-    }
     
     void generate(int num,int &permu,int n,string ans,string &res){
         if(ans.size()==n){
@@ -29,7 +21,6 @@ public:
         
     }
     string getPermutation(int n, int k) {
-        int permu = fact(n);
         string res;
         generate(1,k,n,"",res);
         return res;
