@@ -14,13 +14,12 @@ class LRUCache {
     Node* mp[10001]={nullptr};
     int limit,size=0;
 public:
-    void display(){
-        Node* node = front;
-        while(node){
-            cout<<node->key<<"->";
-            node=node->right;
-        }
-        cout<<"\n";
+    LRUCache(int capacity) {
+        limit=capacity;
+        front=back=nullptr;
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
     }
     
     void makeFront(Node* tmp){
@@ -52,21 +51,13 @@ public:
         front = node;
         mp[key] = front;
     }
-    
-    LRUCache(int capacity) {
-        limit=capacity;
-        front=back=nullptr;
-        ios::sync_with_stdio(false);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-    }
+
     
     int get(int key) {
         if(!mp[key])
             return -1;
         Node* tmp = mp[key];
         makeFront(tmp);
-        //display();
         return front->val;
     }
     
@@ -80,7 +71,6 @@ public:
         }
         
         while(size>limit){
-            cout<<"Deleted "<<back->key<<"\n";
             mp[back->key]=nullptr;
             size--;
             Node *tmp = back->left;
@@ -89,7 +79,6 @@ public:
             back = tmp;
         }
         
-       // display();
     }
 };
 
