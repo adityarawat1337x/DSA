@@ -19,7 +19,7 @@ public:
         pair<int,int> lim ={-1,-1};
         q.push(lim);
         
-        while(!(q.size()<=1 and q.front()!=lim)){
+        while(!(q.size()<=1 and q.front()==lim)){
             if(q.front()==lim){
                 q.pop();
                 min++;
@@ -45,6 +45,6 @@ public:
             }
         }
         
-        return min-1;
+        return min;
     }
 };
