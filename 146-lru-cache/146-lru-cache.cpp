@@ -11,8 +11,8 @@ struct Node
 
 class LRUCache {
     Node *front,*back;
-    unordered_map<int,Node*> mp;
-    int limit;
+    Node* mp[10001]={nullptr};
+    int limit,size=0;
 public:
     void display(){
         Node* node = front;
@@ -62,7 +62,7 @@ public:
     }
     
     int get(int key) {
-        if(mp.find(key)==mp.end())
+        if(!mp[key])
             return -1;
         Node* tmp = mp[key];
         makeFront(tmp);
@@ -71,15 +71,18 @@ public:
     }
     
     void put(int key, int value) {
-        if(mp.find(key)!=mp.end()){
+        if(mp[key]){
             mp[key]->val=value;
             makeFront(mp[key]);
-        }else
+        }else{
             newNode(key,value);
+            size++;
+        }
         
-        while(mp.size()>limit){
+        while(size>limit){
             cout<<"Deleted "<<back->key<<"\n";
-            mp.erase(back->key);
+            mp[back->key]=nullptr;
+            size--;
             Node *tmp = back->left;
             delete back;
             tmp->right = NULL;
