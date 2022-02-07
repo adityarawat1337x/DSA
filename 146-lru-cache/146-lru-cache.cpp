@@ -56,6 +56,9 @@ public:
     LRUCache(int capacity) {
         limit=capacity;
         front=back=nullptr;
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
     }
     
     int get(int key) {
