@@ -14,7 +14,9 @@ public:
     }
     
     int romanToInt(string s) {
-       
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);  
+     
         int mp[26]={0,0,100,500,0,0,0,0,1,0,0,50,1000,0,0,0,0,0,0,0,0,5,0,10,0,0};
         int ans=0;
         char prev='I';
