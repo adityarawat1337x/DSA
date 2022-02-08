@@ -14,7 +14,7 @@ public:
         bool lps[n][n];
         int m=-1;
             
-        for(int i=n-1;i>=0;i--)
+        for(int i=n-1;i>-1;i--)
             for(int j=i;j<n;j++){
                 lps[i][j] = (s[i]==s[j]) && (j-i<3 || lps[i+1][j-1]);
                 
