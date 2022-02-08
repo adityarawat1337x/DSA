@@ -1,13 +1,12 @@
 class Solution {
-   static bool comp(string a,string b){
-        return a.length()<b.length();
-    }
 public:
  
     string longestCommonPrefix(vector<string>& strs) {
-        
-        sort(strs.begin(),strs.end(),comp);
         string prefix=strs[0];
+        
+        for(auto s:strs){
+            prefix = s.length()<prefix.length()?s:prefix;
+        }
         
         for(auto s:strs){
             if(prefix=="")
