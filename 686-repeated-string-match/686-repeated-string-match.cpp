@@ -61,11 +61,13 @@ public:
             a+=tmp;
         }
         
-      if(match(b,a))
-            return cnt;
-        a+=tmp;
-        if(match(b,a))
-            return cnt+1;
-        return -1;
+        while(!match(b,a)){
+            if(a.length()>b.length() and cnt>3)
+                return -1;
+            a+=tmp;
+            cnt++;
+        }
+        
+        return cnt;
     }
 };
