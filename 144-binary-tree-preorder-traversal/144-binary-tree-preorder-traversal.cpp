@@ -13,11 +13,25 @@ class Solution {
     vector<int> ans;
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        if(!root)
-            return ans;
-        ans.push_back(root->val);
-        preorderTraversal(root->left);        
-        preorderTraversal(root->right);
+        
+        while(root){
+            ans.push_back(root->val);
+            if(!root->left){
+                root=root->right;
+            }else{
+                TreeNode* link = root->left;
+                while(link->right and link->right!=root)
+                        link=link->right;
+                if(not link->right){
+                    link->right = root;
+                    root=root->left;
+                }else{
+                    link->right = NULL;
+                    root=root->right;
+                    ans.pop_back();
+                }
+            }
+        }
         return ans;
     }
 };
