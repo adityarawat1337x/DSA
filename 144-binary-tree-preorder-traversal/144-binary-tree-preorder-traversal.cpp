@@ -15,8 +15,8 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
         
         while(root){
-            ans.push_back(root->val);
             if(!root->left){
+                ans.push_back(root->val);
                 root=root->right;
             }else{
                 TreeNode* link = root->left;
@@ -24,11 +24,11 @@ public:
                         link=link->right;
                 if(not link->right){
                     link->right = root;
+                    ans.push_back(root->val);
                     root=root->left;
                 }else{
                     link->right = NULL;
                     root=root->right;
-                    ans.pop_back();
                 }
             }
         }
