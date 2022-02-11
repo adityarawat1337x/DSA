@@ -12,9 +12,9 @@
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-      vector<vector<int>>  ans;
+        vector<vector<int>>  ans;
         queue<pair<TreeNode*,int>> q;
-        int lvl=-1;
+        int lvl=-1,minCol=INT_MAX,maxCol=INT_MIN,maxRow=INT_MIN;
         map<pair<int,int>,vector<int>> mp;
         q.push({nullptr,-1});
         q.push({root,(1000/2)});
@@ -32,6 +32,10 @@ public:
                 rt = y.first;
                 idx = y.second;
             }
+            minCol = min(minCol,idx);
+            maxCol = max(maxCol,idx);
+            maxRow = max(maxRow,lvl);
+            
             if(mp.find({idx,lvl})!=mp.end()){
                 mp[{idx,lvl}].push_back(rt->val);
             }else{
@@ -44,9 +48,9 @@ public:
                 q.push({rt->right,idx+1});
            
         }
-        for(int i=0;i<=1000;i++){
+        for(int i=minCol;i<=maxCol;i++){
             vector<int> subans;
-            for(int j=0;j<=1000;j++)
+            for(int j=0;j<=maxRow;j++)
                 if(mp.find({i,j})!=mp.end()){
                     auto tmp = mp[{i,j}];
                     if(tmp.size()>1);
