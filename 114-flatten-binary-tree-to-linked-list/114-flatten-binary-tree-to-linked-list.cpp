@@ -11,19 +11,16 @@
  */
 class Solution {
 public:
-    TreeNode* create(TreeNode* root,TreeNode* super){
-       if(!root or !super)
-           return super;
-        super->left=NULL;
-        super->right=root;
-        TreeNode* tmp = root->right;
-        TreeNode* l = create(root->left,root);
-        TreeNode* r = create(tmp,l);
-        return r;
-    }
-    
+
     void flatten(TreeNode* root) {
-        TreeNode* super = new TreeNode(0);
-        create(root,super);
+        if (root == nullptr) return;
+        for (auto node = root; node != nullptr; node = node->right) {
+            if (node->left == nullptr) continue;
+            auto rightMost = node->left;
+            while (rightMost->right != nullptr) rightMost = rightMost->right;
+            rightMost->right = node->right;
+            node->right = node->left;
+            node->left = nullptr;
+        }
     }
 };
