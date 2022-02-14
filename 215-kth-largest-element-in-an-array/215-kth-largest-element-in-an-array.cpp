@@ -20,11 +20,11 @@ public:
     }
     int findKthLargest(vector<int>& nums, int k) {
        int n = nums.size();
-       ///if(k<=n-k){
+       if(k<=n-k){
           priority_queue<int,vector<int>,greater<int>> heap;
            return solve(nums,k,heap);
-      // }
-      // priority_queue<int> heap;
-      //  return solve(nums,n-k,heap);
+       }
+       priority_queue<int> heap;
+        return solve(nums,n-k+1,heap);
     }
 };
