@@ -11,32 +11,19 @@
  */
 class Solution {
 public:
-    pair<TreeNode*,TreeNode*> create(TreeNode* root){
-        if(!root or (!root->left and !root->right))
-            return {root,root};
-        
-        if(!root->left)
-            return {root,create(root->right).second};
-        
-        if(!root->right){
-            auto l = create(root->left);
-            root->left=nullptr;
-            root->right=l.first;
-            return {root,l.second};
-        }
-        
-        
-        auto l = create(root->left);
-        auto r = create(root->right);
-        root->left=nullptr;
-        root->right = l.first;
-        auto tmp = l.second;
-        tmp->right = r.first;
-        tmp = r.second;
-        return {root,tmp};
+    TreeNode* create(TreeNode* root,TreeNode* super){
+       if(!root or !super)
+           return super;
+        super->left=NULL;
+        super->right=root;
+        TreeNode* tmp = root->right;
+        TreeNode* l = create(root->left,root);
+        TreeNode* r = create(tmp,l);
+        return r;
     }
     
     void flatten(TreeNode* root) {
-        create(root);
+        TreeNode* super = new TreeNode(0);
+        create(root,super);
     }
 };
