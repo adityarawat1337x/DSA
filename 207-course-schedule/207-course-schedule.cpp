@@ -1,39 +1,34 @@
 class Solution {
 public:
-    bool isCycle(vector<int> vis,vector<int> &dfsvis,vector<vector<int>> &graph,int k){
-        if(vis[k])
-            return true;
-        vis[k]=true;
-        if(!dfsvis[k])
-            for(auto i:graph[k]){
-                if( isCycle(vis,dfsvis,graph,i))
+    bool DFS(int &i,vector<bool> &dfs, vector<bool> &dfsCurr,vector<vector<int>>& graph){
+        dfs[i]=true;
+        dfsCurr[i]=true;
+        
+        for(auto x:graph[i]){
+            if(!dfs[x]){
+                if(DFS(x,dfs,dfsCurr,graph))
                     return true;
+            }else if(dfsCurr[x]){
+                return true;
             }
-        dfsvis[k]=true;
+        }
+        
+        dfsCurr[i]=false;
         return false;
     }
     
+    
     bool canFinish(int n, vector<vector<int>>& pre) {
-       if(!pre.size())
-           return true;
+        vector<bool> dfs(n,false),dfsCurr(n,false);
         vector<vector<int>> graph(n);
         for(auto i:pre){
             graph[i[0]].push_back(i[1]);
         }
         
-        vector<int> vis(n,false);
-        vector<int> dfsvis(n,false);
+        for(int i=0;i<n;i++)
+            if(DFS(i,dfs,dfsCurr,graph))
+                return false;
         
-        for (int i = 0; i < n; i++){
-            if (graph[i].size()){
-                if(isCycle(vis,dfsvis,graph,i)){
-                cout<<i;
-                    return false;
-                }
-            }
-        }
-    
         return true;
-                
-    }
+        }
 };
