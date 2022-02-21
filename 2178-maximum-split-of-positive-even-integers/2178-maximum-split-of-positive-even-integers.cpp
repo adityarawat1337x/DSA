@@ -10,8 +10,7 @@ public:
             finalSum-=i;
         }
         
-        ans[ans.size()-1]+=finalSum;
-        
+        ans.back()+=finalSum;
         return ans;
     }
 };
