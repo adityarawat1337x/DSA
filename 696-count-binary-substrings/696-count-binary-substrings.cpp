@@ -1,24 +1,20 @@
 class Solution {
 public:
-    int countBinarySubstrings(string s) {
-        vector<int> v;
-        char prev=s[0];
-        int i=0,j=0;
-        for(i=0,j=0;j<s.size();j++){
-            if(s[j]!=prev){
-                v.push_back(j-i);
-                i=j;
-                prev=s[j];
+  int countBinarySubstrings(string s) {
+        ios::sync_with_stdio(false); 
+        cin.tie(nullptr);
+        cout.tie(nullptr);        
+
+        int start = 0, i=1, e=s.size(), prevLen=0, ans = 0;
+        while (i < e){
+            if (s[i] != s[i-1]){
+                ans += min(prevLen, i - start);
+                prevLen = i - start;
+                start = i;
             }
+            ++i;
         }
-        v.push_back(j-i);
-        
-        int ans=0;
-        for(int i=0;i<v.size()-1;i++){
-            cout<<v[i]<<" ";
-            ans+=min(v[i],v[i+1]);
-        }
-        
+        ans += min(prevLen, i-start);
         return ans;
     }
 };
