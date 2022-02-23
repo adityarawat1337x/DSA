@@ -27,17 +27,12 @@ public:
             parent[i]=i;
         }
         
-       for (int u = k + 1; u <= n; u++){
-            for (int v = u * 2; v <= n; v += u) {
-          
-                if (u!=v){
-                    un(u,v);
-                }
-            }
-        }
+       for (int u = k + 1; u <= n; u++)
+            for (int v = u * 2; v <= n; v += u) 
+                un(u,v);
       
        
-     vector<bool> ans;
+       vector<bool> ans;
         
       for(auto node : queries){
             ans.push_back(find(node[0])==find(node[1]));
