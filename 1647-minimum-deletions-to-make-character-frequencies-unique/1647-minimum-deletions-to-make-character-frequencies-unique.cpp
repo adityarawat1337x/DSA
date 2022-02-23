@@ -11,16 +11,13 @@ public:
         int ans=0;
         for(auto i:sr){
             if(v[i]){
-                int avail = i;
+                int avail=i;
                 while(avail>0 and v[avail]!=0){
+                    ans++;
                     avail--;
                 }
-                if(avail==0)
-                    ans+=i;
-                else{
+                if(avail!=0)
                     v[avail]=1;
-                    ans+=i-avail;
-                }
             }else{
                 v[i]=1;
             }
