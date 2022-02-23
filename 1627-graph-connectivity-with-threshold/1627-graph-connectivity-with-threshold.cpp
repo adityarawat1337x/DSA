@@ -5,6 +5,8 @@ public:
     void un(int u,int v){
         u = find(u);
         v = find(v);
+        if(u==v)
+            return;
         if(rank[u]>rank[v]){
             parent[v]=u;
             rank[u]++;
