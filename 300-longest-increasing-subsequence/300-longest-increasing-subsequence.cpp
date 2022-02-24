@@ -5,20 +5,17 @@ public:
         if(nums.size()<=1){
             return nums.size();
         }
-        vector<int>  dp(nums.size()+1,1);
+        vector<int>  dp;
+        dp.push_back(nums[0]);
         for(int i=1;i<nums.size();i++){
-            for(int j=0;j<i;j++){
-                if(nums[i]>nums[j]){
-                    if(dp[j]+1>dp[i]){
-                        dp[i]=dp[j]+1;
-                    }
-                }
+            if(nums[i]>dp.back())
+                dp.push_back(nums[i]);
+            else{
+                auto bound = lower_bound(dp.begin(),dp.end(),nums[i]);
+                dp[bound-dp.begin()]=nums[i];
             }
         }
-        int ans=0;
-        for(int i=0;i<nums.size();i++){
-            ans=max(ans,dp[i]);
-        }
-        return ans;
+        
+        return dp.size();
     }
 };
