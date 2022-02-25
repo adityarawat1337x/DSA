@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         unordered_set<string> mp;
-        sort(words.begin(),words.end(),[&](auto a,auto b){
+        sort(words.begin(),words.end(),[&](auto &a,auto &b){
             return a.size()<b.size();
         });
         
