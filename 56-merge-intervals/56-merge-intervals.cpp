@@ -8,7 +8,7 @@ public:
         for(int i = 1; i < intervals.size(); i++) {
             if(intervals[i][0] <= r) {
                 if(intervals[i][1] > r)
-                    r = intervals[i][1];
+                    r = max(r,intervals[i][1]);
             } else {
                 res.push_back({l, r});
                 l = intervals[i][0];
