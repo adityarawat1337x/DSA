@@ -3,8 +3,6 @@ public:
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         unordered_set<string> mp;
         sort(words.begin(),words.end(),[&](auto a,auto b){
-            if(a.size()==b.size())
-                return a<b;
             return a.size()<b.size();
         });
         
