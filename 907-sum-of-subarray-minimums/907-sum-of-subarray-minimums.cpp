@@ -6,7 +6,7 @@ public:
         vector<int> l(arr.size()),r(arr.size());
         
         for(int i=0;i<arr.size();i++){
-            while(!st.empty() and arr[st.top()]>arr[i])
+            while(!st.empty() and arr[st.top()]>=arr[i])
                 st.pop();
             if(!st.empty())
                 l[i] = st.top();
@@ -19,7 +19,7 @@ public:
             st.pop();
         
         for(int i=arr.size()-1;i>-1;i--){
-            while(!st.empty() and arr[st.top()]>=arr[i])
+            while(!st.empty() and arr[st.top()]>arr[i])
                 st.pop();
             if(!st.empty())
                 r[i] = st.top();
@@ -32,7 +32,6 @@ public:
         long long ans=0,mod = 1e9 + 7;
         
         for(int i=0;i<arr.size();i++){
-            //cout<<l[i]<<" "<<i<<" "<<r[i]<<"\n";
             ans=(ans%mod + (arr[i]%mod*((i-l[i])%mod*(r[i]-i)%mod)%mod)%mod)%mod;
         }
         
