@@ -2,7 +2,8 @@ class Solution {
 public:
     int kthFactor(int n, int k) {
         int i;
-        for(i=1;i*i<=n;i++)
+        int sq=sqrt(n);
+        for(i=1;i<=sq;i++)
             if(n%i==0 and --k==0)
                 return i;    
             
