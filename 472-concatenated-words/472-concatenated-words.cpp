@@ -9,8 +9,9 @@ public:
         });
         
         vector<string> ans;
-        
-        for(auto s:words){
+        mp.insert(words[0]);
+        for(int x=1;x<words.size();x++){
+            string s = words[x];
             vector<bool> dp(s.size()+1,0);
             dp[0]=1;
             for(int i=1;i<=s.size();i++)
@@ -19,10 +20,9 @@ public:
                         dp[i]=dp[j];
                         break;
                     }
-            if(dp.size()>1 and dp.back())
+            if(dp.back())
                 ans.push_back(s);
-            if(s.size())
-                mp.insert(s);
+            mp.insert(s);
         }
         return ans;
     }
