@@ -1,18 +1,82 @@
 class Solution {
 public:
-    long long subArrayRanges(vector<int>& nums) {
+        long long sumSubarrayMaxs(vector<int>& arr) {
+        vector<vector<long long>> dp(arr.size()+1);
+        stack<long long> st;
+        vector<long long> l(arr.size()),r(arr.size());
         
-        int n =nums.size();
-           long long  ans=0;
-        for(int i=0;i<n;i++){
-            int mini=INT_MAX,maxi=INT_MIN;
-            for(int j=i;j<n;j++){
-                mini = min(mini,nums[j]);
-                maxi = max(maxi,nums[j]);
-                ans = ans + (maxi-mini);
-            }
+        for(int i=0;i<arr.size();i++){
+            while(!st.empty() and arr[st.top()]<arr[i])
+                st.pop();
+            if(!st.empty())
+                l[i] = st.top();
+            else
+                l[i]=-1;
+            st.push(i);
+        }
+
+        while(!st.empty())
+            st.pop();
+        
+        for(int i=arr.size()-1;i>-1;i--){
+            while(!st.empty() and arr[st.top()]<=arr[i])
+                st.pop();
+            if(!st.empty())
+                r[i] = st.top();
+            else
+                r[i]=arr.size();
+            st.push(i);
+        }
+
+        
+        long long ans=0,mod = 1e9 + 7;
+        
+        for(int i=0;i<arr.size();i++){
+            ans=ans + arr[i]*(i-l[i])*(r[i]-i);
         }
         
-    return ans;
+        return ans;
+    }
+    
+    long long sumSubarrayMins(vector<int>& arr) {
+        vector<vector<long long>> dp(arr.size()+1);
+        stack<long long> st;
+        vector<long long> l(arr.size()),r(arr.size());
+        
+        for(int i=0;i<arr.size();i++){
+            while(!st.empty() and arr[st.top()]>=arr[i])
+                st.pop();
+            if(!st.empty())
+                l[i] = st.top();
+            else
+                l[i]=-1;
+            st.push(i);
+        }
+
+        while(!st.empty())
+            st.pop();
+        
+        for(int i=arr.size()-1;i>-1;i--){
+            while(!st.empty() and arr[st.top()]>arr[i])
+                st.pop();
+            if(!st.empty())
+                r[i] = st.top();
+            else
+                r[i]=arr.size();
+            st.push(i);
+        }
+
+        
+        long long ans=0,mod = 1e9 + 7;
+        
+        for(int i=0;i<arr.size();i++){
+            ans=ans + arr[i]*(i-l[i])*(r[i]-i);
+        }
+        
+        return ans;
+    }
+    
+    long long subArrayRanges(vector<int>& nums) {
+        return sumSubarrayMaxs(nums)-sumSubarrayMins(nums);
     }
 };
