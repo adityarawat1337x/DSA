@@ -6,8 +6,7 @@ public:
         
         for(int i=1;i<n;i++){
             int nt = prev;
-            int t = (i>1)?prev2:0;
-            t+=nums[i];
+            int t = prev2+nums[i];
             prev2=prev;
             prev = max(t,nt);
         }
