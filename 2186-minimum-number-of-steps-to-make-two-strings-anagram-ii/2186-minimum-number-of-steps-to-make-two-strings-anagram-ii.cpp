@@ -11,13 +11,13 @@ public:
         }
         
         for(auto i:t){
-            mp2[i]++;
+            mp[i]--;
         }
         
         int ans=0;
         for(char c='a';c<='z';c++){
             int sc=mp[c],tc=mp2[c];
-            ans+=abs(tc-sc);
+            ans+=abs(mp[c]);
         }
         
         return ans;
