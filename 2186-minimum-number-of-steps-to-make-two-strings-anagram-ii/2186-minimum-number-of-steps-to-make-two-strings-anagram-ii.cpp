@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minSteps(string s, string t) {
-        unordered_map<char,int> mp;
+        vector<int> mp(256,0);
         
         for(auto i:s){
             mp[i]++;
