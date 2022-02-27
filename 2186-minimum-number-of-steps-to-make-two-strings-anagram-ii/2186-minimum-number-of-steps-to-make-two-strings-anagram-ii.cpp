@@ -17,7 +17,7 @@ public:
         int ans=0;
         for(char c='a';c<='z';c++){
             int sc=mp[c],tc=mp2[c];
-            ans+=(sc>tc)?sc-tc:tc-sc;
+            ans+=abs(tc-sc);
         }
         
         return ans;
