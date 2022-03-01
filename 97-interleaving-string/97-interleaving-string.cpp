@@ -24,6 +24,22 @@ public:
         vector<vector<int>> dp(s1.size()+1,vector<int>(s2.size()+1,-1));
         if(s1.size()+s2.size()!=s3.size())
             return false;
-        return solve(s1,s2,s3,0,0,0,dp);
+        
+        for(int i=0;i<=s1.size();i++){
+            for(int j=0;j<=s2.size();j++){
+                if(i==0 and j==0)
+                    dp[i][j]=true;
+                else if(i==0){
+                    dp[i][j] = (s2[j-1]==s3[i+j-1] and dp[i][j-1]);
+                }else if(j==0){
+                    dp[i][j] = (s1[i-1]==s3[i+j-1] and dp[i-1][j]);
+                }else{
+                    dp[i][j] = (s1[i-1]==s3[i+j-1] and dp[i-1][j]) or (s2[j-1]==s3[i+j-1] and dp[i][j-1]);
+                }
+            }
+        }
+        
+        return dp.back().back();
+        
     }
 };
