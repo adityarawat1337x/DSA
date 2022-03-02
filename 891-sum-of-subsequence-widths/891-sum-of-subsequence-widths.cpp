@@ -14,9 +14,6 @@ public:
         }
  
         
-        long out = maxi-mini;
-        if(out<0)
-            out+=mod;
-        return out;
+        return (maxi-mini+mod)%mod;
     }
 };
