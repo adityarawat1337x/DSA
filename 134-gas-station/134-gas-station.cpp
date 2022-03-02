@@ -1,40 +1,18 @@
 class Solution {
 public:
-    int check(vector<int>& gas, vector<int>& cost,int idx){
-        int n=gas.size();
-        int k=n;
-        int gasLeft=0;
-        while(k--){
-            if(gasLeft<0)
-                return -1;
-            gasLeft+=gas[idx]-cost[idx];
-         
-            idx=(idx+1)%n;
-        }
-        
-        return (gasLeft>=0)?idx:-1;
-    }
-    
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int diff=INT_MIN,idx=-1;
-        int n=gas.size();
-        vector<int> v(n);
 
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int gasLeft=0,total=0;
+        int ans=0;
         for(int i=0;i<gas.size();i++){
-            v[i]=i;
-        }
-        
-        sort(v.begin(),v.end(),[&](auto &a,auto &b){
-            return (gas[a]-cost[a]) > (gas[b]-cost[b]);
-        });
-        
-        for(auto i:v){
-            if(check(gas,cost,i)==i){
-                return i;
+             gasLeft+=gas[i]-cost[i];
+             total+=gas[i]-cost[i];
+            if(gasLeft<0){
+                ans=i+1;
+                gasLeft=0;
             }
         }
         
-        return -1;
-      
+        return (total>=0)?ans:-1;
     }
 };
