@@ -2,7 +2,7 @@ class Solution {
 public:
     int minMoves(vector<int>& nums, int k) {
         long i=0,j=0,sum=0;
-        int ans=INT_MAX;
+        long ans=INT_MAX;
         
         //only 1 matters so make a vector of 1 indexes
         vector<long> ones;
@@ -25,25 +25,25 @@ public:
         }
         
         //maintain a window of k and lets find cost of moving everything at median
-        int left = 0, right = k - 1;
+    
+    long left = 0, right = k - 1;
 		while (right < ones.size()) {
-			if (k%2== 1) {
-				int medianInd = left + (k + 1) / 2 - 1;
-				int rad = medianInd - left;
-				int res = (presum[right] - presum[medianInd])
-						- ((medianInd == 0 ? 0 : presum[medianInd - 1]) - (left == 0 ? 0 : presum[left - 1])) - rad * (rad + 1);
-				ans = min(ans, res);
-			} else {
-				int medianInd = left + (k + 1) / 2 - 1;
-				int rad = medianInd - left;
-				int res = (presum[right] - presum[medianInd])
-						- ((medianInd == 0 ? 0 : presum[medianInd - 1]) - (left == 0 ? 0 : presum[left - 1]))
-						- ones[medianInd] - rad * (rad + 1) - (rad + 1);
-				ans = min(ans, res);
-			}
+            long medianInd = left + (k+1)/2 - 1;
+            long rad = medianInd - left;
+            long l = (medianInd == 0 ? 0 : presum[medianInd-1]) - (left == 0 ? 0 : presum[left-1]);
+            long r = (presum[right] - presum[medianInd]);
+            long res = r-l-rad*(rad+1);
+            
+            //checking for even extra radius removal
+            if (k%2==0) {
+                res=res-(rad+1)-ones[medianInd];
+            }
+        
+            ans = min(ans,res);
 			left++;
 			right++;
 		}
 		return ans;
     }
 };
+
