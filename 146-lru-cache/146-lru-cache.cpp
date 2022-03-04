@@ -22,6 +22,15 @@ public:
         cout.tie(nullptr);
     }
     
+    void display(){
+        Node* node = front;
+        while(node){
+            cout<<node->key<<"->";
+            node=node->right;
+        }
+        cout<<"\n";
+    }
+    
     void makeFront(Node* tmp){
         if(tmp==front)
             return;
