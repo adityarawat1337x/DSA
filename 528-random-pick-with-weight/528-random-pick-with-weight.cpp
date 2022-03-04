@@ -12,16 +12,6 @@ public:
     
     int pickIndex() {
         int idx = rand()%sum + 1;
-        int left = 0, right = presum.size() - 1;
-        while(left<right){
-            int mid = left + (right-left)/2;
-            if(presum[mid] == idx)
-                return mid;
-            else if(presum[mid] < idx)
-                left = mid + 1;
-            else
-                right = mid;
-        }
         return lower_bound(presum.begin(),presum.end(),idx)-presum.begin();
     }
 };
