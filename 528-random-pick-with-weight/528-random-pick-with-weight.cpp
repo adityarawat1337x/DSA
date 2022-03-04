@@ -22,7 +22,7 @@ public:
             else
                 right = mid;
         }
-        return left;
+        return lower_bound(presum.begin(),presum.end(),idx)-presum.begin();
     }
 };
 
