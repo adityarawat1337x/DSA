@@ -16,6 +16,7 @@ public:
         
         string ans(m+n-L[m][n],' ');
         int i=m,j=n,idx=ans.size()-1;
+        
         while(i>0 && j>0){
             if(s1[i-1]==s2[j-1]){
                 ans[idx]=s1[i-1];
@@ -34,18 +35,16 @@ public:
             }
         }
         
-            if(i>0 || j>0){
-                while(i>0){
-                    ans[idx]=s1[i-1];
-                    idx--;
-                    i--;
-                }
-                while(j>0){
-                    ans[idx]=s2[j-1];
-                    idx--;
-                    j--;
-                }
-            } 
+        while(i>0){
+            ans[idx]=s1[i-1];
+            idx--;
+            i--;
+        }
+        while(j>0){
+            ans[idx]=s2[j-1];
+            idx--;
+            j--;
+        }
         
         return ans;
     }
