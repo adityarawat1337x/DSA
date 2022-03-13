@@ -13,21 +13,38 @@ public:
     }
     
     int uniquePathsWithObstacles(vector<vector<int>>& og) {
-        vector<vector<long>> dp(og.size()+1,vector<long>(og[0].size()+1,0));
+        vector<long> row(og[0].size()+1);
         
-        if(og.back().back()==0)
-            dp[og.size()][og[0].size()-1]=1;
-        
-        for(int i=og.size()-1;i>-1;i--)
+        if(og.back().back()==1)
+            return 0;
+        row[og[0].size()-1]=1;
+        for(int i=og.size()-1;i>-1;i--){
+            vector<long> tmp(og[0].size()+1);
             for(int j=og[0].size()-1;j>-1;j--){
                 if(og[i][j]==1)
-                    dp[i][j]=0;
+                    tmp[j]=0;
                 else
-                    dp[i][j] = dp[i+1][j] + dp[i][j+1];
+                    tmp[j] = row[j] + tmp[j+1];
             }
+            row=tmp;
+        }
             
-        return  dp[0][0];
+        return row[0];
         
         //return run(og,0,0,dp);
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
