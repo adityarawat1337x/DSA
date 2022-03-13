@@ -16,17 +16,20 @@ public:
     }
     
     int minPathSum(vector<vector<int>>& grid) {
-        vector<vector<long>> dp(grid.size()+1,vector<long>(grid[0].size()+1,INT_MAX));
+        vector<long> row(grid[0].size()+1,INT_MAX);
         
-        for(int i=1;i<=grid.size();i++)
+        for(int i=1;i<=grid.size();i++){
+            vector<long> tmp(grid[0].size()+1,INT_MAX);
             for(int j=1;j<=grid[0].size();j++){
                 if(i==1 and j==1)
-                    dp[i][j]=grid[i-1][j-1];
+                    tmp[j]=grid[i-1][j-1];
                 else
-                    dp[i][j] = grid[i-1][j-1] + min(dp[i-1][j],dp[i][j-1]);
+                    tmp[j] = grid[i-1][j-1] + min(row[j],tmp[j-1]);
             }
+            row=tmp;
+        }
         
-        return dp.back().back();
+        return row.back();
         //return minPS(grid.size()-1,grid[0].size()-1,grid,dp);
     }
 };
