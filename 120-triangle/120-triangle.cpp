@@ -24,7 +24,7 @@ public:
         return run(0,0,triangle,dp);
     }
     */
-
+/* TABULATION
  int minimumTotal(vector<vector<int>>& tri) {
     vector<vector<long>> dp(tri.size()+1,vector<long>(tri.back().size()+1,0));
         for(int i=tri.size()-1;i>-1;i--){
@@ -34,6 +34,20 @@ public:
         }
      
      return dp[0][0];
+    }
+*/    
+    
+int minimumTotal(vector<vector<int>>& tri) {
+   vector<long> row(tri.back().size()+1,0);
+        for(int i=tri.size()-1;i>-1;i--){
+            vector<long> tmp(tri.back().size()+1,0);
+            for(int j=tri[i].size()-1;j>-1;j--){
+                tmp[j] = tri[i][j] + min(row[j],row[j+1]);
+            }
+            row=tmp;
+        }
+     
+     return row[0];
     }
 };
 
