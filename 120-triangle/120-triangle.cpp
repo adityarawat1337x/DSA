@@ -1,5 +1,8 @@
 class Solution {
 public:
+    
+    
+    /* RECURSIVE + MEMO
     int run(int i,int j,vector<vector<int>>& triangle,vector<vector<long>>& dp){
         if(i==triangle.size()-1)
             return triangle[i][j];
@@ -20,4 +23,21 @@ public:
         vector<vector<long>> dp(triangle.size(),vector<long>(triangle.back().size(),INT_MAX));
         return run(0,0,triangle,dp);
     }
+    */
+
+ int minimumTotal(vector<vector<int>>& tri) {
+    vector<vector<long>> dp(tri.size()+1,vector<long>(tri.back().size()+1,0));
+        for(int i=tri.size()-1;i>-1;i--){
+            for(int j=tri[i].size()-1;j>-1;j--){
+                dp[i][j] = tri[i][j] + min(dp[i+1][j],dp[i+1][j+1]);
+            }
+        }
+     
+     return dp[0][0];
+    }
 };
+
+
+
+
+
