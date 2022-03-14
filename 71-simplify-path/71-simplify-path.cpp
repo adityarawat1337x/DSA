@@ -18,21 +18,12 @@ public:
     }
     
     string simplifyPath(string path) {
-        string Path="";
-        for(int i=0;i<path.size();i++){
-            if(path[i]=='/' and Path.back()=='/'){
-                continue;
-            }
-            Path+=path[i];
-                
-        }
-       
-        auto dirs = split(Path);
+      
+        auto dirs = split(path);
         
         stack<string> s,s2;
         
         for(auto i:dirs){
-            cout<<i<<" ";
             if(i==".."){
                 if(s.size())
                     s.pop();
@@ -46,15 +37,10 @@ public:
         
         string ans = "";
         
-        while(s.size()){
-            s2.push(s.top());
+         while(s.size()){
+           
+            ans="/"+s.top()+ans;
             s.pop();
-        }
-        
-         while(s2.size()){
-             ans+='/';
-            ans+=s2.top();
-            s2.pop();
          }
         
         return ans.size()?ans:"/";
