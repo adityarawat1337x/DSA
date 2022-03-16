@@ -16,6 +16,15 @@ public:
     
     bool canJump(vector<int>& nums) {
         vector<int> dp(nums.size(),-1);
+        if(nums.size()==1)
+            return true;
+        int maxIdx=0;
+        for(int i=0;i<nums.size();i++){
+            maxIdx = max(maxIdx,i+nums[i]);
+            if(nums[i]==0 and maxIdx<=i and i!=nums.size()-1)
+                return false;
+        }
+        return true;
         return reach(nums,0,dp);
     }
 };
