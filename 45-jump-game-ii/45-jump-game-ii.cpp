@@ -16,17 +16,18 @@ public:
     }
     
     int jump(vector<int>& nums) {
-        vector<int> dp(nums.size(),-1);
-        dp[nums.size()-1]=0;
-        for(int i=nums.size()-2;i>-1;i--){
-            int ans=INT_MAX-1;
-            for(int j=1;j<=nums[i];j++)
-                if(i+j<nums.size())
-                    ans = min(ans,dp[i+j]);
-            dp[i]=1+ans;
+        int position = nums.size() - 1;
+        int steps = 0;
+        while (position != 0) {
+            for (int i = 0; i < position; i++) {
+                if (nums[i] >= position - i) {
+                    position = i;
+                    steps++;
+                    break;
+                }
+            }
         }
-        
-        return dp[0];
-        return reach(nums,0,dp);
+        return steps;
+    
     }
 };
