@@ -46,23 +46,22 @@ public:
     }
     */
      int coinChange(vector<int>& coins, int amount) {
-        vi curr(amount+1),prev(amount+1);
+        vi dp(amount+1);
         for(int i=0;i<=amount;i++)
-            prev[i]=INT_MAX-1;
+            dp[i]=INT_MAX-1;
         
         for(int i=1;i<=coins.size();i++){
-            prev[0]=0;
+            dp[0]=0;
             
             for(int j=1;j<=amount;j++){
-                int noTake = prev[j];
+                int noTake = dp[j];
                 int take = INT_MAX-1;
                 if(j>=coins[i-1])
-                    take = 1 + curr[j-coins[i-1]];
-                curr[j] = min(take,noTake);
+                    take = 1 + dp[j-coins[i-1]];
+                dp[j] = min(take,noTake);
             }
-            prev=curr;
         }
-        return curr.back()>=INT_MAX-1?-1:curr.back();
+        return dp.back()>=INT_MAX-1?-1:dp.back();
     }
    
 };
