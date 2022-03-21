@@ -20,6 +20,8 @@ public:
         return dp[idx][amount] = min(take,noTake);
     }
     */
+    /*
+    TABULIZATION
     int coinChange(vector<int>& coins, int amount) {
         vector<vi> dp(coins.size()+1,vi(amount+1,-1));
         for(int i=0;i<=amount;i++)
@@ -42,4 +44,25 @@ public:
         //int ans =  minCoin(coins,coins.size()-1,amount,dp);
         //return ans>=INT_MAX-1?-1:ans;
     }
+    */
+     int coinChange(vector<int>& coins, int amount) {
+        vi curr(amount+1),prev(amount+1);
+        for(int i=0;i<=amount;i++)
+            prev[i]=INT_MAX-1;
+        
+        for(int i=1;i<=coins.size();i++){
+            prev[0]=0;
+            
+            for(int j=1;j<=amount;j++){
+                int noTake = prev[j];
+                int take = INT_MAX-1;
+                if(j>=coins[i-1])
+                    take = 1 + curr[j-coins[i-1]];
+                curr[j] = min(take,noTake);
+            }
+            prev=curr;
+        }
+        return curr.back()>=INT_MAX-1?-1:curr.back();
+    }
+   
 };
