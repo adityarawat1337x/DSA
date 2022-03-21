@@ -1,7 +1,7 @@
 #define vi vector<int> 
 class Solution {
 public:
-    /* RECUR + MEMO
+    /* RECURSION + MEMO
     int minCoin(vector<int>& coins,int idx,int amount,vector<vi> &dp) {
         if(amount==0)
             return 0;
@@ -18,6 +18,11 @@ public:
             take = 1+minCoin(coins,idx,amount-coins[idx],dp);
         
         return dp[idx][amount] = min(take,noTake);
+    }
+     int coinChange(vector<int>& coins, int amount) {
+        vector<vi> dp(coins.size()+1,vi(amount+1,-1));
+        int ans =  minCoin(coins,coins.size()-1,amount,dp);
+        return ans>=INT_MAX-1?-1:ans;
     }
     */
     /*
@@ -40,11 +45,10 @@ public:
             }
         
         return dp.back().back()>=INT_MAX-1?-1:dp.back().back();
-        
-        //int ans =  minCoin(coins,coins.size()-1,amount,dp);
-        //return ans>=INT_MAX-1?-1:ans;
+    
     }
     */
+    // SPACE OPTI 1D-DP
      int coinChange(vector<int>& coins, int amount) {
         vi dp(amount+1);
         for(int i=0;i<=amount;i++)
