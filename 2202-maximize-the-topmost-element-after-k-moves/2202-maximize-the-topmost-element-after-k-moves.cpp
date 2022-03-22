@@ -7,19 +7,12 @@ public:
                 return k&1?-1:nums[0];
             else return nums[0];
         }
-        if(k==0)
-             if(nums.size()>=0)
-                return nums[0];
-             else return -1;
-        if(k==1)
-            if(nums.size()>=2)
-                return nums[1];
-            else
-                return -1;
+        if(k==0 or k==1)
+            return nums[k];
         
         int ans = *max_element(nums.begin(),nums.end());
         
-        if(k>nums.size())
+        if(k>n)
             return ans;
         
         return max(*max_element(nums.begin(),nums.begin()+k-1),nums[k]);
