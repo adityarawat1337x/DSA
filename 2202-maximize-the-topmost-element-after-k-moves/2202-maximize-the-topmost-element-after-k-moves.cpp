@@ -16,11 +16,7 @@ public:
                 return nums[1];
             else
                 return -1;
-         if(k==2)
-            if(nums.size()>=3)
-                return max(nums[0],nums[2]);
-            else
-                return -1;
+        
         int ans = *max_element(nums.begin(),nums.end());
         
         if(k>nums.size())
