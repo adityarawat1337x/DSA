@@ -1,7 +1,7 @@
 class Solution {
 public:
     string getSmallestString(int n, int k) {
-        string s="";
+        string s(n,' ');
         char c;
         int val;
         while(n--){
@@ -19,10 +19,8 @@ public:
             else if(c<'a')
                 c='a';
             k-=((c-'a')+1);
-            s.push_back(c);
+            s[n]=c;
         }
-        
-        reverse(s.begin(),s.end());
         return s;
     }
 };
