@@ -16,6 +16,27 @@ public:
     }
     
     int maxProfit(int k,vector<int>& prices) {
+        // TABULATION + DP
+        if(k==0)
+            return 0;
+        vector<int> buy(k,INT_MIN),sell(k,0);
+        int prevsell=0,prevbuy=0;
+            
+        for(auto p:prices){
+            for(int i=0;i<k;i++){
+                if(i==0)
+                    buy[i] = max(buy[i],-p);
+                else
+                    buy[i] = max(buy[i],prevsell-p);
+                prevbuy=buy[i];
+                sell[i] = max(sell[i],prevbuy+p);
+                prevsell=sell[i];
+            }
+        }
+        
+        return sell[k-1];
+        
+        
         //RECUR + MEMO
         vector<vector<vector<int>>> dp(prices.size(),vector<vector<int>>(2,(vector<int>(k,-1))));
         return recur(prices,k,0,dp,0,1);
