@@ -14,17 +14,22 @@ public:
     }
     
     int maxProfit(vector<int>& prices) {
-        /*int sell=0,buy=INT_MIN,prev=buy;
+        // TABULATION + SPACE OPTIMISATION
+        
+        int sell=0,buy=INT_MIN,prev=sell;
      
         for(auto p:prices){
             int prev2=prev;
             prev=sell;
-            buy=max(buy,sell+p);
-            sell=max(sell,prev2-p);
+            sell=max(sell,buy+p);
+            buy=max(buy,prev2-p);
         }
         
         return sell;
-        */
+        
+        
+        // RECUSRSION + MEMO
+        
         vector<vector<int>> dp(prices.size(),vector<int>(2,-1));
         return recur(prices,dp,0,1);
 
