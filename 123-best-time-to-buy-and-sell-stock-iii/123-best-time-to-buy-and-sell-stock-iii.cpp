@@ -16,8 +16,7 @@ public:
     }
     
     int maxProfit(vector<int>& prices) {
-        int k=2;
-        vector<vector<vector<int>>> dp(prices.size(),vector<vector<int>>(2,(vector<int>(k,-1))));
+        // TABULATION + DP
         int buy1=INT_MIN,buy2=INT_MIN,sell1=0,sell2=0;
         
         for(auto p:prices){
@@ -30,6 +29,10 @@ public:
         return sell2;
         
         
-        //return recur(prices,k,0,dp,0,1);
+        //RECUR + MEMO
+        int k=2;
+        vector<vector<vector<int>>> dp(prices.size(),vector<vector<int>>(2,(vector<int>(k,-1))));
+        
+        return recur(prices,k,0,dp,0,1);
     }
 };
