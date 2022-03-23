@@ -21,8 +21,8 @@ public:
         for(auto p:prices){
             int prev2=prev;
             prev=sell;
-            sell=max(sell,buy+p);
             buy=max(buy,prev2-p);
+            sell=max(sell,buy+p);
         }
         
         return sell;
