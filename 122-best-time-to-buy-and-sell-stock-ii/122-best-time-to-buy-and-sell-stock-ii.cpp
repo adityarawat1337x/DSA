@@ -1,14 +1,18 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        int sell = 0, buy = INT_MIN;
+    int recur(vector<int>& prices,vector<vector<int>> &dp,int idx,bool buy){
+        if(idx>=prices.size())
+            return 0;
+        if(dp[idx][buy]!=-1)
+            return dp[idx][buy];
         
-        for(auto p:prices){
-            int prev=sell;
-            sell = max(sell,buy+p);
-            buy = max(buy,prev-p);
+        if(buy){
+            return dp[idx][buy] = max(recur(prices,dp,idx+1,!buy)-prices[idx],recur(prices,dp,idx+1,buy));
         }
-        
-        return sell;
+        return dp[idx][buy] = max(recur(prices,dp,idx+1,buy),recur(prices,dp,idx+1,!buy)+prices[idx]);
+    }
+    int maxProfit(vector<int>& prices) {
+        vector<vector<int>> dp(prices.size(),vector<int>(2,-1));
+        return recur(prices,dp,0,1);
     }
 };
