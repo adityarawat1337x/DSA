@@ -13,6 +13,14 @@ public:
     }
     int maxProfit(vector<int>& prices) {
         vector<vector<int>> dp(prices.size(),vector<int>(2,-1));
-        return recur(prices,dp,0,1);
+        
+        int sell=INT_MIN,buy=0;
+        for(auto p:prices){
+            int prev=buy;
+            sell = max(sell,prev-p);
+            buy = max(buy,sell+p);
+        }
+        return buy;
+        //return recur(prices,dp,0,1);
     }
 };
