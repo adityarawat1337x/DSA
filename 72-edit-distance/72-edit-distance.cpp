@@ -18,8 +18,27 @@ public:
     }
     
     int minDistance(string t1, string t2) {
-        vector<vector<int>> dp(t1.size()+1,vector<int>(t2.size()+1,0));
+        //TABULATION + SPACE OPTI
+        vector<int> curr(t2.size()+1,0),prev(t2.size()+1,0);
+        
+         for(int i=0;i<=t1.size();i++){
+            for(int j=0;j<=t2.size();j++){
+                if(i==0 or j==0){
+                    curr[j]=max(i,j);
+                    continue;
+                }
+                if(t1[i-1]==t2[j-1])
+                     curr[j] = prev[j-1];
+                else
+                    curr[j] = 1 + min({ curr[j-1], prev[j], prev[j-1]});
+            }
+            prev=curr;
+        }   
+        
+        return curr.back();
+        
         //TABULATION
+        vector<vector<int>> dp(t1.size()+1,vector<int>(t2.size()+1,0));
         for(int i=0;i<=t1.size();i++){
             for(int j=0;j<=t2.size();j++){
                 if(i==0 or j==0){
