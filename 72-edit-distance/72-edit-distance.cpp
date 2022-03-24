@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //RECURSION + MEMO
     int solve(string &t1,string &t2,int i,int j,vector<vector<int>> &dp){
         if(i<0 and j<0)
             return 0;
@@ -17,7 +18,24 @@ public:
     }
     
     int minDistance(string t1, string t2) {
-        vector<vector<int>> dp(t1.size(),vector<int>(t2.size(),-1));
-        return solve(t1,t2,t1.size()-1,t2.size()-1,dp);
+        vector<vector<int>> dp(t1.size()+1,vector<int>(t2.size()+1,0));
+        //TABULATION
+        for(int i=0;i<=t1.size();i++){
+            for(int j=0;j<=t2.size();j++){
+                if(i==0 or j==0){
+                    dp[i][j]=max(i,j);
+                    continue;
+                }
+                if(t1[i-1]==t2[j-1])
+                     dp[i][j] = dp[i-1][j-1];
+                else
+                    dp[i][j] = 1 + min({ dp[i][j-1], dp[i-1][j], dp[i-1][j-1]});
+            }  
+        }       
+        
+        return dp.back().back();
+        //RECUR + MEMO
+        vector<vector<int>> memo(t1.size(),vector<int>(t2.size(),-1));
+        return solve(t1,t2,t1.size()-1,t2.size()-1,memo);
     }
 };
