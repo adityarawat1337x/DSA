@@ -44,7 +44,23 @@ public:
         mp["24"]='X';
         mp["25"]='Y';
         mp["26"]='Z';
-        vector<int> dp(s.size(),-1);
-        return solve(0,mp,s,dp);
+        //TABULATION
+        vector<int> dp(s.size()+2,0);
+        dp[s.size()+1]=1;
+        dp[s.size()]=1;
+        
+        for(int i=s.size()-1;i>-1;i--){
+            string pat="";
+            if(mp.find(pat+s[i])!=mp.end())
+                dp[i]+=dp[i+1];
+            
+            if(i<s.size()-1 and mp.find(pat+s[i]+s[i+1])!=mp.end())
+                dp[i]+=dp[i+2];
+        }
+        
+        return dp[0];
+        //RECURSION + MEMO
+        vector<int> memo(s.size(),0);
+        return solve(0,mp,s,memo);
     }
 };
