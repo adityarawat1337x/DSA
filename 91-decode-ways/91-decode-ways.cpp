@@ -44,6 +44,25 @@ public:
         mp["24"]='X';
         mp["25"]='Y';
         mp["26"]='Z';
+        
+        //TABULATION + SPACE OPTIMISATION
+        int prev =1,prev2=1;
+        
+        for(int i=s.size()-1;i>-1;i--){
+            string pat="";
+            int curr=0;
+            if(mp.find(pat+s[i])!=mp.end())
+                curr+=prev;
+            
+            if(i<s.size()-1 and mp.find(pat+s[i]+s[i+1])!=mp.end())
+                curr+=prev2;
+            
+            prev2=prev;
+            prev=curr;
+        }
+        
+        return prev;
+        
         //TABULATION
         vector<int> dp(s.size()+2,0);
         dp[s.size()+1]=1;
