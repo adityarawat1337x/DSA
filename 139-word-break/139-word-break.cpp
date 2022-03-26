@@ -1,23 +1,23 @@
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        set<string> dict;
+        set<string> st;
         for(auto i:wordDict)
-            dict.insert(i);
+            st.insert(i);
         
-        long dp[s.size()+1];
-        memset(dp,0,sizeof(dp));
-        dp[0]=1;
+        vector<bool> dp(s.size()+1);
+        dp[0]=true;
+        
         for(int i=1;i<=s.size();i++){
-            for(int j=0;j<=i;j++){
+            for(int j=0;j<i;j++){
                 string search = s.substr(j,i-j);
-                if(dp[j] and dict.count(search)){
-                    dp[i] = dp[j];
+                if(st.count(search) and dp[j]){
+                    dp[i]=true;
                     break;
                 }
             }
         }
         
-        return dp[s.size()];
+        return dp.back();
     }
 };
