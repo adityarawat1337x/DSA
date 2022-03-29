@@ -27,11 +27,22 @@ class Solution{
 	
 	int maxSumIS(int arr[], int n)
 	{  
-	   vector<int> dp(n,-1);
-	   int ans=0;
-	   for(int i=n-1;i>-1;i--)
-	        ans = max(ans,arr[i] + solve(arr, i-1, i,dp));
-	   return ans;
+	   vector<int> dp(n,0);
+	   dp[0]=arr[0];
+	   for(int i=1;i<n;i++){
+	       int maxi=0;
+	         for(int j=0;j<i;j++){
+	              int inc=0,exc=0;
+            	   if(arr[j]<arr[i]){
+            	       maxi=max(maxi,dp[j]);
+            	   }
+	         }	   
+            	   dp[i] = maxi + arr[i];
+	         
+	   }
+	   
+	   return *max_element(dp.begin(),dp.end());
+	   
 	}  
 };
 
