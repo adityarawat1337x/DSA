@@ -5,14 +5,13 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
-	int solve(int arr[],int n,int idx,int prev,vector<vector<int>> &dp){
+	int solve(int arr[],int n,int idx,int prev,vector<int> &dp){
 	    if(idx<0){
 	        return 0;
-	        return dp[idx][prev] = arr[idx]<=prev?arr[idx]:0;
 	    }
 	    
-	   if(dp[idx][prev]!=-1)
-	        return dp[idx][prev];
+	   if(dp[prev]!=-1)
+	        return dp[prev];
 	   
 	   int inc=0,exc=0;
 	   
@@ -25,13 +24,13 @@ class Solution{
 	   
 	   exc = solve(arr,n,idx-1,prev,dp);
 	   
-	   dp[idx][prev] = max(exc,inc);
-	   return dp[idx][prev];
+	   dp[prev] = max(exc,inc);
+	   return dp[prev];
 	}
 	
 	int maxSumIS(int arr[], int n)
 	{  
-	   vector<vector<int>> dp(n,vector<int>(n+1,-1));
+	   vector<int> dp(n+1,-1);
 	   return solve(arr,n, n-1, n,dp);
 	}  
 };
