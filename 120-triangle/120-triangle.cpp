@@ -23,8 +23,10 @@ public:
         vector<vector<long>> dp(triangle.size(),vector<long>(triangle.back().size(),INT_MAX));
         return run(0,0,triangle,dp);
     }
-    */
-/* TABULATION
+ 
+ */
+
+/*TABULATION
  int minimumTotal(vector<vector<int>>& tri) {
     vector<vector<long>> dp(tri.size()+1,vector<long>(tri.back().size()+1,0));
         for(int i=tri.size()-1;i>-1;i--){
