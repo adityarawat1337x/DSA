@@ -12,8 +12,5 @@ public:
             col--;
         }
         return false;
-        
-        
-        
     }
 };
