@@ -19,7 +19,24 @@ public:
     }
     
     int wiggleMaxLength(vector<int>& nums) {
+        //space optimized
+        vector<int> prev(2,0),curr(2,0);
         
+        for(int i=1;i<nums.size();i++){
+            for(int j=0;j<2;j++){
+                int inc=0,exc=0;
+                int diff = nums[i]-nums[i-1];
+                if((diff<0 and j) or (diff>0 and !j)) 
+                    inc = 1+ prev[!j];
+                exc = prev[j];
+                curr[j] = max(inc,exc);
+            }
+            prev=curr;
+        }
+        
+        return 1+max(curr[0],curr[1]);
+        
+        //tabulation
         vector<vector<int>> dp(nums.size(),vector<int>(2,0));
         
         for(int i=1;i<nums.size();i++){
@@ -35,6 +52,7 @@ public:
         
         return 1 + max(dp[nums.size()-1][0],dp[nums.size()-1][1]);
         
+        //recursive + memo
         vector<vector<int>> memo(nums.size(),vector<int>(2,-1));
         return 1 + max(solve(nums,0,nums.size()-1,memo),solve(nums,1,nums.size()-1,memo));
     }
