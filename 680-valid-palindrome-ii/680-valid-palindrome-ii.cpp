@@ -1,3 +1,6 @@
+#pragma GCC optimize("fast")
+static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+
 class Solution {
 public:
     bool solve(string s,int l,int r,int ctr){
