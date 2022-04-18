@@ -2,7 +2,8 @@ class Solution {
 public:
    void longestWithLengthI(string &s,int &k,int &unique,int &ans){
        int uniqueWithK=0,uniqueSoFar=0;
-       unordered_map<int,int> mp;
+       int mp[265];
+       memset(mp,0,sizeof(mp));
        for(int i=0,j=0;j<s.size();j++){
           if(mp[s[j]]==0){
                uniqueSoFar++;
