@@ -20,7 +20,7 @@ public:
                 a=prev;
                 b=root;
             }else{
-                c=root;
+                b=root;
             }
             voil++;
         }
@@ -33,10 +33,6 @@ public:
         TreeNode* a,*b,*c;
         TreeNode* prev = new TreeNode(INT_MIN);
         inorder(root,a,b,c,voil,prev);
-        if(voil>=2){
-            swap(a->val,c->val);
-        }else{
-            swap(a->val,b->val);
-        }
+        swap(a->val,b->val);
     }
 };
