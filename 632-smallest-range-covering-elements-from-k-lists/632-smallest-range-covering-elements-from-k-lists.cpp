@@ -19,8 +19,9 @@ public:
             if(!mp[v[j].second]++)ctr++;
             if(ctr==k){
                 while(mp[v[i].second]>1)mp[v[i++].second]--;
-                if (ans.empty() || ans[1] - ans[0] > v[j].first - v[i].first) {
-                    ans = vector<int>{v[i].first, v[j].first};
+                if(mini>v[j].first-v[i].first or (mini==v[j].first-v[i].first and ans[0]>v[i].first)){
+                    mini = v[j].first-v[i].first;
+                    ans = {v[i].first,v[j].first};
                 }
             }
         }
