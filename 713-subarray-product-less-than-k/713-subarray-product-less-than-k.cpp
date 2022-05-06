@@ -11,15 +11,11 @@ public:
         long long prod=1;
         for(i=0,j=0;j<nums.size();j++){
             prod*=nums[j];
-            if(prod>=k){
-                ans+=combi(i,j)-combi(i,last);
-                last=j;
-            }
             while(i<=j and prod>=k){
                 prod/=nums[i++];
             }
+            ans+=j-i+1;
         }
-         ans+=combi(i,j)-combi(i,last);
         
         return ans;
     }
