@@ -2,22 +2,27 @@ class Solution {
 public:
 vector<string> keypad = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     
-    vector<string> lc(string digits) {
-       vector<string> answers;
-        if (digits.empty()) return {""};
-     
-        for (auto first : keypad[digits[0] - '0']) {
-            for (auto rest : lc(digits.substr(1))) {
+    void lc(vector<string> &ans,string digits,int idx) {
+        if(idx>=digits.length())
+            return;
+        vector<string> answers;
+        for (auto rest : keypad[digits[idx] - '0']) {
+            for (auto first : ans) {
                 answers.push_back(first + rest);
             }
         }
-        return answers;
+        ans=answers;
+        lc(ans,digits,idx+1);
     }
     
     vector<string> letterCombinations(string digits) {
         if (digits.empty()) return {};
-       return lc(digits);
-      
-       
+        vector<string> ans;
+        string tmp="";
+        for(char i:keypad[digits[0] - '0']){
+            ans.push_back(tmp+i);
+        }
+        lc(ans,digits,1);
+        return ans;
     }
 };
