@@ -1,32 +1,35 @@
 class Solution {
 public:
     int divide(int dividend, int divisor) {
-        
-        long long cnt=0,div=abs(divisor);
-        bool neg=false;
-        
-        if(divisor<0)
-            neg=!neg;
-        if(dividend<0)
-            neg=!neg;
-        
-        long long divd=abs(dividend);
-        long long divv=abs(divisor);
-        
-        if(divv==1){
-            return neg?max((long long)INT_MIN,-divd):min((long long)INT_MAX,divd);
+        long D = dividend;
+        long d = divisor;
+        bool negative = false;
+        if (D < 0)
+        {
+            D = -D;
+            negative = !negative;
         }
-        int i=0;
-        while(divd>=(divv<<1)){
-            cnt+=(1<<i);
-            divv=divv<<1;
-            i++;
+        if (d < 0)
+        {
+            d = -d;
+            negative = !negative;
         }
-        while(divd>=divv){
-            cnt++;
-            divv+=div;
+        if      (d >  D) return 0;
+        else if (d == D) return (negative)?-1:1;
+        long result = 0;
+        int nbits = 0;
+        for (long aux = d; (aux > 0) && (nbits < 32); ++nbits, aux >>= 1);
+        d <<= 32 - nbits;
+        for (int i = 0; i <= 32 - nbits; ++i)
+        {
+            result <<= 1;
+            if (D >= d)
+            {
+                result |= 1;
+                D -= d;
+            }
+            d >>= 1;
         }
-        
-        return neg?max((long long)INT_MIN,-cnt):min((long long)INT_MAX,cnt);
+        return (negative)?-result:std::min<long>(result, 0x7FFFFFFF);
     }
 };
