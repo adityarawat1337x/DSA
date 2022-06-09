@@ -5,12 +5,10 @@ public:
             int tmp = num[i]+num[j];
             if(tmp==target){
                 return {i+1,j+1};
+            }else if(tmp>target){
+                j--;
             }else{
-                if(tmp>target){
-                    j--;
-                }else{
-                    i++;
-                }
+                i++;
             }
         }
         
