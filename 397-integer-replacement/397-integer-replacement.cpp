@@ -1,13 +1,21 @@
 class Solution {
 public:
-    long long solve(long long n){
-        if(n==1)
-            return 0;
-        if(n%2==0)
-            return 1+solve(n/2);
-        return 2+min(solve((n+1)/2),solve((n-1)/2));
-    }
+
     int integerReplacement(int n) {
-        return solve(n);
+        long long num=n;
+        int ans=0;
+        while(num!=1){
+            if(num&1){
+                long long sub = __builtin_popcountll(num);
+                long long add = __builtin_popcountll(num+1);
+                if(add<sub and num!=3)
+                    num++;
+                else
+                    num--;
+            }else
+                num=num>>1;
+            ans++;
+        }
+        return ans;
     }
 };
