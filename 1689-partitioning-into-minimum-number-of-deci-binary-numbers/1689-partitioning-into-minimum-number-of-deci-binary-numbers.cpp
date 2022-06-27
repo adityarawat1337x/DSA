@@ -6,6 +6,9 @@ public:
             if(ans+'0'<n[i]){
                 ans = n[i]-'0';
             }
+            if(ans==9)
+                return ans;
         }
-        return ans;}
+        return ans;
+    }
 };
