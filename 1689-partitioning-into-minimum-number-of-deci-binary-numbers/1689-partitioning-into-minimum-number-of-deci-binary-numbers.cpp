@@ -1,13 +1,12 @@
 class Solution {
 public:
     int minPartitions(string n) {
-        int ans=0;
-        for(int i=0;i<n.size();i++){
-            if(ans+'0'<n[i]){
-                ans = n[i]-'0';
-            }
-            if(ans==9)
-                return ans;
+        short ans=0;
+        int i=0;
+        while(i<n.size() and ans!=9){
+            if(ans<n[i]-48)
+                ans = n[i]-48;
+            i++;
         }
         return ans;
     }
