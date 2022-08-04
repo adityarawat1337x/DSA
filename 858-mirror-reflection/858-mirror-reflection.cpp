@@ -14,9 +14,15 @@ public:
             return solve(len,gone-len,ray,right,!up);
         return solve(len,gone,ray,!right,up);
     }
-    
+    int gcd(int a,int b){
+        while(b){
+            a=a%b;
+            swap(a,b);
+        }
+        return a;
+    }
     int mirrorReflection(int p, int q) {
-        int x = (p*q)/__gcd(p,q);
+        int x = (p*q)/gcd(p,q);
         int m = x/p,n=x/q;
         if(!(m&1))
             return 0;
