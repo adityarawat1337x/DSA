@@ -14,9 +14,9 @@ public:
         if(vowel[prev]=='e')
             return dp[n][prev] = (count(n-1,0)%mod + count(n-1,2)%mod)%mod;
         if(vowel[prev]=='i')
-            return dp[n][prev] = (count(n-1,0)%mod + count(n-1,1)%mod + count(n-1,3)%mod + count(n-1,4)%mod )%mod;
+            return dp[n][prev] = (count(n-1,0)%mod + count(n-1,1)%mod + count(n-1,3)%mod + count(n-1,4)%mod)%mod;
         if(vowel[prev]=='o')
-            return  dp[n][prev] = (count(n-1,2)%mod + count(n-1,4)%mod )%mod;
+            return  dp[n][prev] = (count(n-1,2)%mod + count(n-1,4)%mod)%mod;
         if(vowel[prev]=='u')
             return dp[n][prev] = count(n-1,0);
         return 0;
