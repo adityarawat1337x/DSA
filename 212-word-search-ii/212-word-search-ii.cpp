@@ -33,20 +33,20 @@ public:
         
         char tmp=board[i][j];
         word+=tmp;
-              
-        if(root->list[tmp-'a']->present){
-            ans.push_back(word);
-            root->list[tmp-'a']->present=false;
-        }
-        
         board[i][j]='#';
 
         for(int k=0;k<4;k++){
             int x=dx[k]+i,y=dy[k]+j;
                 dfs(x,y,root->list[tmp-'a'],word,board);
         }
+                      
+        if(root->list[tmp-'a']->present){
+            ans.push_back(word);
+            root->list[tmp-'a']->present=false;
+        }
+        
+        
         board[i][j]=tmp;
-  
         word.pop_back();
 
     }
