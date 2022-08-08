@@ -1,8 +1,9 @@
 class Solution {
 public:
     int chalkReplacer(vector<int>& chalk,unsigned long long k) {
-      
-        unsigned long long int sum=accumulate(chalk.begin(),chalk.end(),0LL);
+        long sum=0;
+        for(auto &i:chalk)
+            sum+=i;
         if(k>sum){
             k=k%sum;
         }
