@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int chalkReplacer(vector<int>& chalk,unsigned long long k) {
+    int chalkReplacer(vector<int>& chalk,int k) {
         long sum=0;
         for(auto &i:chalk)
             sum+=i;
