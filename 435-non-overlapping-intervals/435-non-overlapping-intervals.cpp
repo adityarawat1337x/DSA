@@ -1,16 +1,22 @@
-bool cmp(vector<int>& a, vector<int>& b) {return a[1] < b[1];}
+bool cmpr(vector<int> &a, vector<int> &b){
+    return a[1]<b[1];
+}
+
 class Solution {
 public:
-    int eraseOverlapIntervals(vector<vector<int>>& segments) {        
-        sort(segments.begin(), segments.end(), cmp);
-        int ans = 0, right = INT_MIN;
-        
-        for (int i = 0; i < segments.size(); i ++) {
-            if (segments[i][0] < right) 
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        int n =intervals.size();
+        int ans = -1;
+        if(n == 0)
+            return 0;
+        sort(intervals.begin(), intervals.end(), cmpr);
+        vector<int> prev = intervals[0];
+        for(auto i: intervals){
+            if(prev[1]>i[0])
                 ans++;
-            else right = segments[i][1];
+            else
+                prev=i;
         }
-        
         return ans;
     }
 };
