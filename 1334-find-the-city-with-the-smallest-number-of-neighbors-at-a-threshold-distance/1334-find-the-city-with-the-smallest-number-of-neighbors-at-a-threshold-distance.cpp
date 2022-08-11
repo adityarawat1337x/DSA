@@ -1,5 +1,6 @@
 class Solution {
 public:
+    int th;
     void djikstra(vector<int> &dis,vector<pair<int,int>> adj[],int s){
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         dis[s]=0;
@@ -12,7 +13,7 @@ public:
             for(auto &x:adj[src]){
                 int next=x.second,wt=x.first;
                 
-                if(dis[next]>dis[src]+wt){
+                if(dis[next]>dis[src]+wt and dis[src]+wt<=th){
                     dis[next]=dis[src]+wt;
                     pq.push({dis[next],next});
                 }
@@ -24,6 +25,7 @@ public:
     int findTheCity(int n, vector<vector<int>>& edges, int thresh) {
         vector<vector<int>> dis(n,vector<int>(n,INT_MAX));
         vector<pair<int,int>> adj[n];
+        th=thresh;
         
         for(auto i:edges){
             adj[i[0]].push_back({i[2],i[1]});
