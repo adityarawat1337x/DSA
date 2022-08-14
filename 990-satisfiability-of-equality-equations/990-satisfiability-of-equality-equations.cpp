@@ -14,29 +14,28 @@ public:
     }
     
     bool equationsPossible(vector<string>& eq) {
-        for(char c='a';c<='z';c++)
-            par[c-'a']=c-'a';
+        for(int i=0;i<26;i++)
+            par[i]=i;
         
         for(auto &s:eq){
-            char a=s[0],b=s[3],c=s[1];
-            if(c=='='){
-                Union(a-'a',b-'a');
+            int a=s[0]-'a',b=s[3]-'a';
+            if(s[1]=='='){
+                Union(a,b);
             }else{
-                int x=find(a-'a'),y=find(b-'a');
-                if(x==y)
+                a=find(a),b=find(b);
+                if(a==b)
                     return false;
             }
         }
-        
         reverse(eq.begin(),eq.end());
         
          for(auto &s:eq){
-            char a=s[0],b=s[3],c=s[1];
-            if(c=='='){
-                Union(a-'a',b-'a');
+            int a=s[0]-'a',b=s[3]-'a';
+            if(s[1]=='='){
+                Union(a,b);
             }else{
-                int x=find(a-'a'),y=find(b-'a');
-                if(x==y)
+                a=find(a),b=find(b);
+                if(a==b)
                     return false;
             }
         }
