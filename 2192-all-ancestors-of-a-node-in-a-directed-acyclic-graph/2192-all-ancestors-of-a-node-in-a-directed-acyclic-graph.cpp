@@ -1,44 +1,21 @@
 class Solution {
 public:
-    vector<set<int>> ans;
-    
-    set<int> dfs(int node,vector<int> adj[]){
-        set<int> tmp;
-        
-        if(ans[node].size()){
-            tmp=ans[node];
-            tmp.insert(node);
-            return tmp;
+    void dfs(vector<vector<int>> &graph,int i,int j,vector<vector<int>> &ans){
+        for(auto &x:graph[j]){
+            if(ans[x].empty() || ans[x].back()!=i){
+                ans[x].push_back(i);
+                dfs(graph,i,x,ans);
+            }
         }
-        for(auto &next:adj[node]){
-            auto x = dfs(next,adj);
-            tmp.insert(x.begin(),x.end());
-        }
-        
-        ans[node]=tmp;
-        tmp.insert(node);
-        return tmp;
-        
     }
-    
     vector<vector<int>> getAncestors(int n, vector<vector<int>>& edges) {
-        vector<int> adj[n];
-        ans.resize(n);
-        
-        for(auto &e:edges){
-            adj[e[1]].push_back(e[0]);
+        vector<vector<int>> ans(n),graph(n);
+        for(auto &v:edges){
+            graph[v[0]].push_back(v[1]);
         }
-        
         for(int i=0;i<n;i++){
-            dfs(i,adj);
+            dfs(graph,i,i,ans);
         }
-        
-        vector<vector<int>> res(n);
-        
-        for(int i=0;i<n;i++){
-            for(auto &x:ans[i])
-                res[i].push_back(x);
-        }
-        return res;
+        return ans;
     }
 };
