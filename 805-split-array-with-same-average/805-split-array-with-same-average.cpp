@@ -6,7 +6,6 @@ public:
             return false;
         
         if(num>0 and avg==sum/num){
-            
             return true;
         }
         
@@ -22,6 +21,8 @@ public:
     }
     
     bool splitArraySameAverage(vector<int>& nums) {
+        cin.tie(NULL);
+        ios_base::sync_with_stdio(false);
         int sum = accumulate(nums.begin(),nums.end(),0);
         int n=nums.size();
         dp.resize(n, vector<vector<bool>>(n, vector<bool>(sum + 1, true)));
