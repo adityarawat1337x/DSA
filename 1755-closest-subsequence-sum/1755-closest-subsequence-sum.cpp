@@ -1,50 +1,52 @@
 class Solution {
 public:
-    void subsets(int idx,int r,vector<long> &s,long sum,vector<int>& nums){
-        if(idx>r){
-            s.push_back(sum);
-            return;
+    void solve(vector<int>&arr , int idx , int limit , int total , vector<int>&sums)
+    {
+        if(idx == limit)
+        {
+            sums.push_back(total) ; 
+            return ; 
         }
-        subsets(idx+1,r,s,sum,nums);
-        subsets(idx+1,r,s,sum+nums[idx],nums);
+        solve(arr , idx+1 , limit , total , sums) ; 
+        solve(arr , idx+1 , limit , total + arr[idx] , sums) ;
     }
     
-    void subsets(int idx,int r,set<long> &s,long sum,vector<int>& nums){
-        if(idx>r){
-            s.insert(sum);
-            return;
+    void search(vector<int>&left , vector<int>&right , int &ans , int target)
+    {
+        int l = 0 ; 
+        int r = right.size()-1 ; 
+        while(l < left.size() && r >= 0)
+        {
+            int ss = left[l] + right[r] ; 
+            ans = min(ans , abs(target - ss)) ; 
+            if(ss < target) l++ ; 
+            else if(ss > target) r-- ; 
+            else break ; 
         }
-        subsets(idx+1,r,s,sum,nums);
-        subsets(idx+1,r,s,sum+nums[idx],nums);
     }
-    
-    int minAbsDifference(vector<int>& nums, int goal) {
-        //meet in the middle lagaooo brooo
-        int n=nums.size();
-        vector<long> left;
-        set<long> right;
-    
-        // subsets are ready
-        subsets(0,n/2,left,0LL,nums);
-        subsets(n/2+1,n-1,right,0LL,nums);
+    int minAbsDifference(vector<int>& arr, int target) {
+        int n = arr.size() ; 
+
+
+        int ans = INT_MAX ; 
+        vector<int>left , right ; 
+        solve(arr , 0 , n/2+1 , 0 , left) ; 
+        solve(arr , n/2+1 , n , 0 , right) ; 
         
-        long ans=INT_MAX;
-        for(auto &sum:left){
-            
-            auto it = right.lower_bound((goal-sum));    
-            
-            if(it!=right.end()){
-                ans = min(ans,abs(goal-sum-*it));
-            }
-            if(it!=right.begin()){
-                it--;
-                ans = min(ans,abs(goal-sum-*it));
-            }
-            
-            if(ans==0)
-                return ans;
+        for(int i = 0 ; i<left.size() ; i++)
+        {
+            ans = min(ans , abs(target - left[i])) ; 
+        }
+        for(int i = 0 ; i < right.size() ; i++)
+        {
+            ans = min(ans , abs(target - right[i])) ; 
         }
         
-        return ans;
+        sort(left.begin() , left.end()) ;
+        sort(right.begin() , right.end()) ; 
+        search(left , right , ans , target) ; 
+        return ans ; 
+        
     }
 };
+
