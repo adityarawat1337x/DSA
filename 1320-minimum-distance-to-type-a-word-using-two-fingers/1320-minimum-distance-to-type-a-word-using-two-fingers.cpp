@@ -8,9 +8,10 @@ class Solution {
     int minimumDistance(string &word, int pos = 0, char left = 26, char right = 26) {
         if (pos >= word.size()) return 0;
         if (dp[left][right][pos] == -1) {
-            auto to = word[pos] - 'A';
-            dp[left][right][pos] = min(cost(left, to) + minimumDistance(word, pos + 1, to, right),
-                cost(right, to) + minimumDistance(word, pos + 1, left, to));
+            dp[left][right][pos] = min(
+              cost(left,word[pos]-'A') + minimumDistance(word,pos+1,word[pos]-'A',right),
+              cost(right,word[pos]-'A') + minimumDistance(word,pos+1,left,word[pos]-'A')
+            );
         }
         return dp[left][right][pos];
     }
