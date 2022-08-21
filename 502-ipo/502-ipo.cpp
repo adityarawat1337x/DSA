@@ -1,11 +1,20 @@
-class Solution(object):
-    def findMaximizedCapital(self, k, W, Profits, Capital):
-        heap = []
-        projects = sorted(zip(Profits, Capital), key=lambda l: l[1])
-        i = 0
-        for _ in range(k):
-            while i < len(projects) and projects[i][1] <= W:
-                heapq.heappush(heap, -projects[i][0])
-                i += 1
-            if heap: W -= heapq.heappop(heap)
-        return W
+class Solution {
+public:
+    int findMaximizedCapital(int k, int w, vector<int>& profits, vector<int>& capital) {
+        vector<pair<int,int>> vp;
+        int n = profits.size();
+        for(int i=0; i<n; i++) vp.push_back({capital[i],profits[i]});
+        sort(vp.begin(),vp.end());
+        priority_queue<int> pq;
+        int i=0;
+        while(i < n and k > 0) {
+            while(i < n and vp[i].first <= w) pq.push(vp[i++].second);
+            if(pq.empty()) break;
+            w+=pq.top(), pq.pop();
+            k--;
+        }
+        while(k-- and !pq.empty()) w+=pq.top(),pq.pop();
+        return w;
+    }
+};
+
