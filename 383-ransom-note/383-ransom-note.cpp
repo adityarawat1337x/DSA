@@ -1,15 +1,15 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        vector<int> freq(26,0);
-        for(auto &i:ransomNote)
+        int freq[26]={0};
+        for(auto &i:magazine)
             freq[i-'a']++;
         
-        for(auto &i:magazine)
-            freq[i-'a']--;
-        
-        for(auto &i:freq)
-            if(i>0) return false;
+        for(auto &i:ransomNote){
+            if(freq[i-'a']>0)
+                freq[i-'a']--;
+            else return false;
+        }
         return true;
     }
 };
