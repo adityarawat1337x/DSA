@@ -19,7 +19,7 @@ public:
             int m=(l+r)/2;
             int ops = check(nums,m,mx);
             if(ops>=0){
-                ans=min(ans,m);
+                ans=m;
                 r=m-1;
             }else {
                 l=m+1;
