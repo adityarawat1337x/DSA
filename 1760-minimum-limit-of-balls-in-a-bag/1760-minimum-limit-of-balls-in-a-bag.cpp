@@ -1,31 +1,16 @@
 class Solution {
 public:
-    int check(vector<int>& nums, int x,int mx){
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]>x){
-                if(nums[i]%x==0)
-                    mx=mx-((nums[i]/x)-1);
-                else mx=mx-(nums[i]/x); 
-            }
+    int minimumSize(vector<int>& A, int k) {
+        int left = 1, right = *max_element(A.begin(),A.end());
+        while (left < right) {
+            int mid = (left + right) / 2, count = 0;
+            for (int a : A)
+                count += (a - 1) / mid;
+            if (count > k)
+                left = mid + 1;
+            else
+                right = mid;
         }
-        return mx;
-    }
-
-    int minimumSize(vector<int>& nums, int mx) {
-        int l = 1,r = *max_element(nums.begin(),nums.end());
-        int ans=INT_MAX;
-
-        while(l<=r){
-            int m=(l+r)/2;
-            int ops = check(nums,m,mx);
-            if(ops>=0){
-                ans=m;
-                r=m-1;
-            }else {
-                l=m+1;
-            }
-        }
-
-        return ans;
+        return left;
     }
 };
