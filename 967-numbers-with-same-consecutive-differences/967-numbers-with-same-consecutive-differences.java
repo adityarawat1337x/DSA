@@ -23,7 +23,6 @@ class Solution {
         diff = k; 
         for(int i=1;i<10;i++)
             solve(i,1);
-        for(int a:arr) System.out.print(a);
         return arr.stream().mapToInt(i -> i).toArray();
     }
 }
